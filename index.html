@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -140,9 +141,16 @@
          reader.onload = function (event) {
             var img = document.getElementById("img");
             img.src = event.target.result;
+
             var url = document.getElementById("url");
-            // Hiển thị chỉ phần sau của chuỗi base64 (sau dấu phẩy)
-            url.textContent = event.target.result.split(",")[1];
+            url.innerHTML = ""; // Xóa nội dung trong phần URL
+
+            var link = document.createElement("a");
+            link.href = event.target.result;
+            link.target = "_blank"; // Điều này sẽ mở hình ảnh trong một tab mới khi liên kết được nhấp
+            link.textContent = "Xem ảnh"; // Bạn có thể tùy chỉnh nội dung văn bản của liên kết ở đây
+
+            url.appendChild(link); // Thêm liên kết vào phần URL
          };
          reader.readAsDataURL(file);
       }
