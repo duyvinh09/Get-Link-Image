@@ -18,6 +18,34 @@
    <meta name="google-site-verification" content="IC9FGIuLJRDJZz1LvuSI2T5GL3YAJq3T9lvgFcqfoeE"/>
    <link rel="shortcut icon" href="https://i.imgur.com/83Gs09S.png" type="image/x-icon"/>
 
+   <style>
+      /* CSS cho nút "Copy Link" */
+      #copyButton {
+         background-color: #4CAF50;
+         color: white;
+         border: none;
+         padding: 10px 20px;
+         font-size: 16px;
+         cursor: pointer;
+         border-radius: 5px;
+         margin-top: 10px;
+      }
+
+      #copyButton:hover {
+         background-color: #45a049; /* Đổi màu khi di chuột qua */
+      }
+
+      /* CSS cho các phần khác của trang */
+      .form-container {
+         /* Thêm CSS của phần "form-container" tại đây nếu cần */
+      }
+
+      .TI {
+         /* Thêm CSS của phần "TI" tại đây nếu cần */
+      }
+
+      /* Thêm các CSS khác tùy ý */
+   </style>
    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7280391568439473"crossorigin="anonymous"></script>
      <!-- font awesome cdn link  -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css?v=2080939">
@@ -42,7 +70,7 @@
    
    <section class="flex">
 
-      <a style="cursor: pointer;" href="https://dinhduyvinh.id.vn/" class="logo">ĐINH DUY VINH <i class="fa fa-check-circle rung" ></i></a>
+      <a style="cursor: pointer;" href="https://dinhduyvinh.id.vn/" class="logo">Đinh Duy Vinh <i class="fa fa-check-circle rung" ></i></a>
 
       <div class="icons">
          <div id="user-btn" class="fas fa-user-graduate"></div>
@@ -73,13 +101,13 @@
    </div>
 </div>
 <section class="form-container">
-
    <div class="TI">
       <h3 style="text-align: center;font-weight: bold;font-size: 25px;color: var(--main-color); padding: 1rem ;"> Công Cụ Tạo Link Ảnh Online Miễn Phí Nhanh Chóng.</h3>
       <label for="formControlHoverLightFullName" style="font-size: 2rem;  margin-top: 1rem; font-weight: bold; color:var(--light-color);">Tải ảnh lên</label><br>
-      <input  class="box" type="file" id="file"  >
-      <div style="font-size: 2rem;  margin-top: 1rem; color:var(--light-color);" ><h5>Link ảnh ở dây:  
-      <h1 id="url"  class="btn" style="height: 4.5rem; text-transform:none ;" ></h1>
+      <input  class="box" type="file" id="file">
+      <div style="font-size: 2rem;  margin-top: 1rem; color:var(--light-color);"><h5>Link ảnh ở dây:
+      <h1 id="url" class="btn" style="height: 4.5rem; text-transform:none ;"></h1>
+      <button id="copyButton" onclick="copyLink()">Copy Link</button> <!-- Thêm nút Copy Link -->
    </div>
    <section class="playlist-details">
       <h1 class="heading">Ảnh Demo</h1>
@@ -90,16 +118,36 @@
       </div>
    </section>
 </section>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7280391568439473"crossorigin="anonymous"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-7280391568439473"
-     data-ad-slot="5219452024"></ins>
+
 <script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
+   // Hàm để sao chép link vào clipboard
+   function copyLink() {
+      var linkText = document.getElementById("url");
+      var range = document.createRange();
+      range.selectNode(linkText);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+      document.execCommand("copy");
+      window.getSelection().removeAllRanges();
+      alert("Link đã được sao chép vào clipboard!");
+   }
+
+   // Hàm để xử lý khi người dùng chọn file
+   document.getElementById("file").addEventListener("change", function () {
+      var file = this.files[0];
+      if (file) {
+         var reader = new FileReader();
+         reader.onload = function (event) {
+            var img = document.getElementById("img");
+            img.src = event.target.result;
+            var url = document.getElementById("url");
+            url.textContent = event.target.result;
+         };
+         reader.readAsDataURL(file);
+      }
+   });
 </script>
+
 <footer class="footer" >
 
    Copyright  &copy; 2023 by <span>Đinh Duy Vinh</span> | all rights reserved!
