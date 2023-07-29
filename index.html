@@ -141,7 +141,8 @@
             var img = document.getElementById("img");
             img.src = event.target.result;
             var url = document.getElementById("url");
-            url.textContent = event.target.result;
+            // Hiển thị chỉ phần sau của chuỗi base64 (sau dấu phẩy)
+            url.textContent = event.target.result.split(",")[1];
          };
          reader.readAsDataURL(file);
       }
