@@ -103,17 +103,19 @@
 </div>
 <section class="form-container">
    <div class="TI">
-      <h3 style="text-align: center;font-weight: bold;font-size: 25px;color: var(--main-color); padding: 1rem ;"> Công Cụ Tạo Link Ảnh Online Miễn Phí Nhanh Chóng.</h3>
-      <label for="formControlHoverLightFullName" style="font-size: 2rem;  margin-top: 1rem; font-weight: bold; color:var(--light-color);">Tải ảnh lên</label><br>
-      <input  class="box" type="file" id="file">
-      <div style="font-size: 2rem;  margin-top: 1rem; color:var(--light-color);"><h5>Link ảnh ở dây:
-      <h1 id="url" class="btn" style="height: 4.5rem; text-transform:none ;"></h1>
-      <button id="copyButton" onclick="copyLink()">Copy Link</button> <!-- Thêm nút Copy Link -->
+      <h3 style="text-align: center;font-weight: bold;font-size: 25px;color: var(--main-color); padding: 1rem ;"> Công Cụ Tạo Link Ảnh Online Miễn Phí Nhanh Chóng.</h3>
+      <label for="formControlHoverLightFullName" style="font-size: 2rem;  margin-top: 1rem; font-weight: bold; color:var(--light-color);">Tải ảnh lên</label><br>
+      <input class="box" type="file" id="file">
+      <div style="font-size: 2rem;  margin-top: 1rem; color:var(--light-color);">
+         <h5>Link ảnh ở đây:</h5>
+         <h1 id="url" class="btn" style="height: 4.5rem; text-transform:none;"></h1>
+         <button id="copyButton" onclick="copyLink()">Sao chép link</button> <!-- Thêm nút Copy Link -->
+      </div>
    </div>
    <section class="playlist-details">
-      <h1 class="heading">Ảnh Demo</h1>
+      <h1 class="heading">Ảnh Demo</h1>
       <div class="row">
-         <div class="column" style="text-align: center ;">
+         <div class="column" style="text-align: center;">
             <img src="https://i.imgur.com/U7afLiO.png" id="img" height="50%" width="50%">
          </div>
       </div>
@@ -123,13 +125,13 @@
 <script>
    // Hàm để sao chép link vào clipboard
    function copyLink() {
-      var linkText = document.getElementById("url");
-      var range = document.createRange();
-      range.selectNode(linkText);
-      window.getSelection().removeAllRanges();
-      window.getSelection().addRange(range);
+      var linkText = document.getElementById("url").textContent.trim(); // Lấy đoạn link và loại bỏ dấu cách ở đầu và cuối
+      var dummyInput = document.createElement("input");
+      document.body.appendChild(dummyInput);
+      dummyInput.setAttribute("value", linkText);
+      dummyInput.select();
       document.execCommand("copy");
-      window.getSelection().removeAllRanges();
+      document.body.removeChild(dummyInput);
       alert("Link đã được sao chép vào clipboard!");
    }
 
