@@ -45,29 +45,33 @@
    <link rel="shortcut icon" href="https://i.imgur.com/83Gs09S.png" type="image/x-icon"/>
 
    <style>
-      #copyButton {
-         background-color: #4CAF50;
-         color: white;
-         border: none;
-         padding: 10px 20px;
-         font-size: 16px;
-         cursor: pointer;
-         border-radius: 5px;
-         margin-top: 10px;
-      }
+    #copyButton {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 7px;
+        margin-top: 10px;
+        transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+        outline: none;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+    }
 
-      #copyButton:hover {
-         background-color: #45a049;
-      }
+    #copyButton:hover {
+        background-color: #45a049;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        transform: translateY(-3px);
+    }
 
-      .form-container {
-         /* Thêm CSS của phần "form-container" tại đây nếu cần */
-      }
-
-      .TI {
-         /* Thêm CSS của phần "TI" tại đây nếu cần */
-      }
-
+    #copyButton:active {
+        background-color: #1e87b0;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        transform: translateY(2px);
+    }
    </style>
    <script disable-devtool-auto md5='2d27c193eef1566b73904e5f948fc708' src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
    <script disable-devtool-auto md5='2d27c193eef1566b73904e5f948fc708' src='./npm/disable-devtool.min.js'></script>
@@ -145,9 +149,9 @@
 </section>
 
 <script>
-   // Hàm để sao chép link vào clipboard
+   
    function copyLink() {
-      var linkText = document.getElementById("url").textContent.trim(); // Lấy đoạn link và loại bỏ dấu cách ở đầu và cuối
+      var linkText = document.getElementById("url").textContent.trim(); 
       var dummyInput = document.createElement("input");
       document.body.appendChild(dummyInput);
       dummyInput.setAttribute("value", linkText);
@@ -157,7 +161,6 @@
       alert("Link đã được sao chép vào clipboard!");
    }
 
-   // Hàm để xử lý khi người dùng chọn file
    document.getElementById("file").addEventListener("change", function () {
       var file = this.files[0];
       if (file) {
@@ -167,14 +170,14 @@
             img.src = event.target.result;
 
             var url = document.getElementById("url");
-            url.innerHTML = ""; // Xóa nội dung trong phần URL
+            url.innerHTML = "";
 
             var link = document.createElement("a");
             link.href = event.target.result;
-            link.target = "_blank"; // Điều này sẽ mở hình ảnh trong một tab mới khi liên kết được nhấp
-            link.textContent = "Đợi xíu nha đang tải ảnh lên 😍"; // Bạn có thể tùy chỉnh nội dung văn bản của liên kết ở đây
+            link.target = "_blank";
+            link.textContent = "Đợi xíu nha đang tải ảnh lên 😍";
 
-            url.appendChild(link); // Thêm liên kết vào phần URL
+            url.appendChild(link);
          };
          reader.readAsDataURL(file);
       }
