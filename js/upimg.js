@@ -8,7 +8,7 @@
        fetch("https://api.imgur.com/3/image/", {
            method: "post",
            headers: {
-               Authorization: "Client-ID 6db47bd7029562d"
+               Authorization: "Client-ID f8f1337fcd3569d"
            },
            body: formdata
        }).then(data => data.json()).then(data => {
@@ -18,7 +18,7 @@
    })
  
  var myHeaders = new Headers();
-myHeaders.append("Authorization", "Client-ID 6db47bd7029562d");
+myHeaders.append("Authorization", "Client-ID f8f1337fcd3569d");
 
 var requestOptions = {
 method: 'GET',
