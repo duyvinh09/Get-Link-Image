@@ -149,23 +149,28 @@
 </section>
 
 <script>
-   
-   function copyLink() {
-      var linkText = document.getElementById("url").textContent.trim(); 
-      var dummyInput = document.createElement("input");
-      document.body.appendChild(dummyInput);
-      dummyInput.setAttribute("value", linkText);
-      dummyInput.select();
-      document.execCommand("copy");
-      document.body.removeChild(dummyInput);
-      alert("Link đã được sao chép vào clipboard!");
-   }
+function copyLink() {
+    var url = document.getElementById("url");
+    var linkText = url.textContent.trim();
 
-   document.getElementById("file").addEventListener("change", function () {
-      var file = this.files[0];
-      if (file) {
-         var reader = new FileReader();
-         reader.onload = function (event) {
+    if (linkText && linkText !== "Đợi xíu nha đang tải ảnh lên 😍") {
+        var dummyInput = document.createElement("input");
+        document.body.appendChild(dummyInput);
+        dummyInput.setAttribute("value", linkText);
+        dummyInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(dummyInput);
+        alert("Link đã được sao chép vào clipboard!");
+    } else if (!linkText) {
+        alert("Vui lòng tải ảnh lên trước khi sao chép link!");
+    }
+}
+
+document.getElementById("file").addEventListener("change", function () {
+    var file = this.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function (event) {
             var img = document.getElementById("img");
             img.src = event.target.result;
 
@@ -178,10 +183,16 @@
             link.textContent = "Đợi xíu nha đang tải ảnh lên 😍";
 
             url.appendChild(link);
-         };
-         reader.readAsDataURL(file);
-      }
-   });
+
+            if (linkText === "Đợi xíu nha đang tải ảnh lên 😍") {
+                document.getElementById("copyButton").disabled = true;
+            } else {
+                document.getElementById("copyButton").disabled = false;
+            }
+        };
+        reader.readAsDataURL(file);
+    }
+});
 </script>
 
 <footer class="footer" >
